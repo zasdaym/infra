@@ -23,4 +23,4 @@ spec:
         namespace: "{{path.basename}}"
       syncPolicy:
         automated:
-          selfHeal: "true"
+          selfHeal: true
