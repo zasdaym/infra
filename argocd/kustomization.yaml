@@ -1,9 +1,9 @@
 namespace: argocd
 resources:
-  - ./namespace.yaml
-  - ./github-zasdaym-sealed-secret.yaml
-  - ./argocd.yaml
-  - ./application-set-controller.yaml
-  - ./main-application-set.yaml
+  - namespace.yaml
+  - github-zasdaym-sealed-secret.yaml
+  - argocd.yaml
+  - application-set-controller.yaml
+  - main-application-set.yaml
 patchesStrategicMerge:
-  - ./argocd_cm_patch.yaml
+  - argocd_cm_patch.yaml
