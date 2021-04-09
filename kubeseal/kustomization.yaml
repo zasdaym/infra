@@ -1,0 +1,4 @@
+namespace: kubeseal
+resources:
+  - ./namespace.yaml
+  - ./sealed-secret.yaml
