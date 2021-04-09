@@ -10,3 +10,6 @@ spec:
         - name: sealed-secrets-controller
           args:
             - --update-status
+          env:
+            - name: SEALED_SECRETS_UPDATE_STATUS
+              value: "1"
