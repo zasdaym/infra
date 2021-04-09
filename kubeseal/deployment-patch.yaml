@@ -2,12 +2,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: sealed-secrets-controller
+  namespace: kube-system
 spec:
   template:
     spec:
       containers:
-        - args:
+        - name: sealed-secrets-controller
+          args:
             - --update-status
-          command:
-            - controller
-          name: sealed-secrets-controller
