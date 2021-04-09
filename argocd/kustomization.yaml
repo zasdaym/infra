@@ -6,4 +6,5 @@ resources:
   - application-set-controller.yaml
   - main-application-set.yaml
 patchesStrategicMerge:
-  - argocd_cm_patch.yaml
+  - ./argocd-cm-patch.yaml
+  - ./argocd-application-controller-patch.yaml
