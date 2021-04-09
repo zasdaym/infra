@@ -1,3 +1,13 @@
-- op: add
-  path: /spec/template/spec/containers/0/args/-
-  value: --update-status
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sealed-secrets-controller
+spec:
+  template:
+    spec:
+      containers:
+        - args:
+            - --update-status
+          command:
+            - controller
+          name: sealed-secrets-controller
