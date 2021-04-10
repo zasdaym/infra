@@ -8,8 +8,6 @@ spec:
     spec:
       containers:
         - name: sealed-secrets-controller
-          args:
-            - --update-status
           env:
             - name: SEALED_SECRETS_UPDATE_STATUS
-              value: "1"
+              value: 1
