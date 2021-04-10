@@ -10,4 +10,4 @@ spec:
         - name: sealed-secrets-controller
           env:
             - name: SEALED_SECRETS_UPDATE_STATUS
-              value: 1
+              value: "1"
