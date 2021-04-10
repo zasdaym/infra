@@ -1,0 +1,3 @@
+resources:
+  - ./contour.yaml
+  - ./tls-certificate-delegation.yaml
