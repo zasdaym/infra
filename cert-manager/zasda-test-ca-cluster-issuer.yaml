@@ -1,0 +1,7 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: zasda-test-ca
+spec:
+  ca:
+    secretName: zasda-test-ca
