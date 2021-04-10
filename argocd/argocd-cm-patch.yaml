@@ -11,4 +11,11 @@ data:
       sshPrivateKeySecret:
         name: github-zasdaym
         key: id_ed25519
+  resource.customizations: |
+      bitnami.com/SealedSecret:
+        health.lua: |
+          hs = {}
+          hs.status = "Healthy"
+          hs.message = "Controller doesn't report resource status"
+          return hs
 ---
