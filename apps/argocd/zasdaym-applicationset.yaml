@@ -13,8 +13,8 @@ spec:
     metadata:
       name: '{{path.basename}}'
     spec:
+      project: default
       source:
-        project: default
         repoURL: https://github.com/zasdaym/gitops.git
         targetRevision: HEAD
         path: '{{path}}'
