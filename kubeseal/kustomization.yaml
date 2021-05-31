@@ -1,6 +1,0 @@
-namespace: kubeseal
-resources:
-  - ./namespace.yaml
-  - ./sealed-secret.yaml
-patchesStrategicMerge:
-  - ./deployment-patch.yaml

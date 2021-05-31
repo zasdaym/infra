@@ -1,4 +1,0 @@
-resources:
-  - cert-manager.yaml
-  - ./zasda-test-ca-sealed-secret.yaml
-  - ./zasda-test-ca-cluster-issuer.yaml
