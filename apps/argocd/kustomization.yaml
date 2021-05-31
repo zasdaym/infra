@@ -2,4 +2,5 @@ resources:
   - ./install.yaml
   - ./applicationset-install.yaml
   - ./zasdaym-applicationset.yaml
+  - ./ingress.yaml
 namespace: argocd
