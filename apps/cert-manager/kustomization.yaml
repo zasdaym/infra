@@ -1,3 +1,4 @@
 resources:
   - ./cert-manager.yaml
   - ./zasda-test-ca-clusterissuer.yaml
+  - ./zasda-test-wildcard-certificate.yaml
