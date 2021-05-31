@@ -6,7 +6,7 @@ metadata:
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
 spec:
   rules:
-    - host: argocd.zasda.lab
+    - host: argocd.zasda.test
       http:
         paths:
           - path: /
