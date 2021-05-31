@@ -4,7 +4,12 @@ metadata:
   name: argocd-server
   annotations:
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    cert-manager.io/cluster-issuer: zasda-test-ca
 spec:
+  tls:
+    - hosts:
+        - argocd.zasda.test
+      secretName: argocd-zasda-test
   rules:
     - host: argocd.zasda.test
       http:
