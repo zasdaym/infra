@@ -2,3 +2,4 @@ resources:
   - ./install.yaml
   - ./applicationset-install.yaml
   - ./zasdaym-applicationset.yaml
+namespace: argocd
