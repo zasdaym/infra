@@ -10,7 +10,7 @@ spec:
       protocol: TCP
       targetPort: 9090
   selector:
-    prometheus: prometheus
+    prometheus: default
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: Prometheus
