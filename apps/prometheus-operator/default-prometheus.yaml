@@ -17,11 +17,11 @@ kind: Prometheus
 metadata:
   name: default
 spec:
-  serviceAccountName: prometheus
   podMonitorSelector:
     matchLabels:
       scrape: "true"
+  replicas: 1
   resources:
     requests:
       memory: 512Mi
-  enableAdminAPI: false
+  serviceAccountName: prometheus
