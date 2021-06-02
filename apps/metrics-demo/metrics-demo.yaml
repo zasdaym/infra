@@ -45,10 +45,10 @@ spec:
     matchLabels:
       app.kubernetes.io/name: metrics-demo
   template:
+    metadata:
+      annotations:
+        scrape: "true"
     spec:
-      metadata:
-        annotations:
-          scrape: "true"
       containers:
         - image: luxas/autoscale-demo:v0.1.2
           name: metrics-provider
