@@ -11,7 +11,8 @@ spec:
         - metrics-demo.zasda.test
       secretName: metrics-demo-zasda-test
   rules:
-    - http:
+    - host: metrics-demo.zasda.test
+      http:
         paths:
           - path: /
             pathType: Prefix
