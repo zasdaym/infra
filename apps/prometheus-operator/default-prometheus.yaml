@@ -42,9 +42,25 @@ metadata:
 spec:
   podMonitorSelector:
     matchLabels:
-      scrape: "true"
+      prometheus-instance: default
   replicas: 1
   resources:
     requests:
       memory: 512Mi
   serviceAccountName: prometheus
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: default
+  labels:
+    prometheus-instance: default
+spec:
+  namespaceSelector:
+    any: true
+  selector:
+      matchLabels:
+        prometheus-instance: default
+  podMetricsEndpoints:
+    - port: metrics
+      path: /metrics
