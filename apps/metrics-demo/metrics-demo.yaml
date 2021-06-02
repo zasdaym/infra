@@ -39,6 +39,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: metrics-demo
+  annotations:
+    scrape: "true"
 spec:
   replicas: 1
   selector:
