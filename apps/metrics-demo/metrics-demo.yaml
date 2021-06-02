@@ -1,0 +1,52 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: metrics-demo
+  annotations:
+    cert-manager.io/cluster-issuer: zasda-test-ca
+spec:
+  tls:
+    - hosts:
+        - metrics-demo.zasda.test
+      secretName: metrics-demo-zasda-test
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: metrics-demo
+                port:
+                  number: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: metrics-demo
+spec:
+  ports:
+    - port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app.kubernetes.io/name: metrics-demo
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: metrics-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: metrics-demo
+  template:
+    spec:
+      containers:
+        - image: luxas/autoscale-demo:v0.1.2
+          name: metrics-provider
+          ports:
+            - containerPort: 8080
