@@ -39,8 +39,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: metrics-demo
-  annotations:
-    scrape: "true"
 spec:
   replicas: 1
   selector:
@@ -48,6 +46,9 @@ spec:
       app.kubernetes.io/name: metrics-demo
   template:
     spec:
+      metadata:
+        annotations:
+          scrape: "true"
       containers:
         - image: luxas/autoscale-demo:v0.1.2
           name: metrics-provider
