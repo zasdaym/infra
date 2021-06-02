@@ -46,7 +46,7 @@ spec:
       app.kubernetes.io/name: metrics-demo
   template:
     metadata:
-      annotations:
+      labels:
         scrape: "true"
     spec:
       containers:
