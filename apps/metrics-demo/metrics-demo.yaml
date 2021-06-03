@@ -26,6 +26,8 @@ apiVersion: v1
 kind: Service
 metadata:
   name: metrics-demo
+  labels:
+    prometheus-instance: default
 spec:
   ports:
     - port: 8080
@@ -45,9 +47,6 @@ spec:
     matchLabels:
       app.kubernetes.io/name: metrics-demo
   template:
-    metadata:
-      labels:
-        prometheus-instance: default
     spec:
       containers:
         - image: luxas/autoscale-demo:v0.1.2

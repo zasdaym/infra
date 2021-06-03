@@ -40,7 +40,7 @@ kind: Prometheus
 metadata:
   name: default
 spec:
-  podMonitorSelector:
+  serviceMonitorSelector:
     matchLabels:
       prometheus-instance: default
   replicas: 1
@@ -50,7 +50,7 @@ spec:
   serviceAccountName: prometheus
 ---
 apiVersion: monitoring.coreos.com/v1
-kind: PodMonitor
+kind: ServiceMonitor
 metadata:
   name: default
   labels:
@@ -61,6 +61,6 @@ spec:
   selector:
       matchLabels:
         prometheus-instance: default
-  podMetricsEndpoints:
+  endpoints:
     - port: metrics
       path: /metrics
