@@ -13,7 +13,7 @@ spec:
         - --secure-port=6443
         - --cert-dir=/tmp/cert
         - --logtostderr=true
-        - --prometheus-url=http://default.prometheus.svc:9090
+        - --prometheus-url=http://default.monitoring.svc:9090
         - --metrics-relist-interval=1m
         - --v=4
         - --config=/etc/adapter/config.yaml
