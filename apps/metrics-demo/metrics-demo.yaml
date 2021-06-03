@@ -57,7 +57,7 @@ spec:
               name: metrics
 ---
 apiVersion: autoscaling/v1
-kind: HorizontalPodAutoScaler
+kind: HorizontalPodAutoscaler
 metadata:
   name: metrics-demo
 spec:
