@@ -30,9 +30,10 @@ metadata:
     prometheus-instance: default
 spec:
   ports:
-    - port: 8080
+    - name: metrics
+      port: 8080
       protocol: TCP
-      targetPort: 8080
+      targetPort: metrics
   selector:
     app.kubernetes.io/name: metrics-demo
   type: ClusterIP
