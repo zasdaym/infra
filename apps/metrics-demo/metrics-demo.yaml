@@ -55,3 +55,20 @@ spec:
           ports:
             - containerPort: 8080
               name: metrics
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoScaler
+metadata:
+  name: metrics-demo
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: metrics-demo
+  minReplicas: 1
+  maxReplicas: 10
+  metrics:
+    - type: Pods
+      pods:
+        metricName: http_requests
+        targetAverageValue: 1
