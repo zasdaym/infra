@@ -1,5 +1,0 @@
-namespace: metrics-demo
-resources:
-  - ./metrics-demo.yaml
-commonLabels:
-  app.kubernetes.io/name: metrics-demo

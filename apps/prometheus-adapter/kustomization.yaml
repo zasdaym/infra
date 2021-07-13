@@ -1,5 +1,0 @@
-namespace: monitoring
-resources:
-  - ./prometheus-adapter.yaml
-patchesStrategicMerge:
-  - ./deployment-patch.yaml

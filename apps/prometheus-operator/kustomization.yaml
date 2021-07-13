@@ -1,5 +1,0 @@
-namespace: monitoring
-resources:
-  - ./bundle.yaml
-  - ./prometheus-rbac.yaml
-  - ./default-prometheus.yaml
