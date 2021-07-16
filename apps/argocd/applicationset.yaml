@@ -8,7 +8,7 @@ spec:
       repoURL: https://github.com/zasdaym/gitops.git
       revision: HEAD
       directories:
-      - path: '*'
+      - path: 'apps/*'
   template:
     metadata:
       name: '{{path.basename}}'
