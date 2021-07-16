@@ -2,3 +2,4 @@ namespace: argocd
 resources:
   - namespace.yaml
   - https://raw.githubusercontent.com/argoproj-labs/applicationset/v0.1.0/manifests/install-with-argo-cd.yaml
+  - applicationset.yaml
