@@ -1,8 +1,8 @@
 namespace: argocd
 resources:
   - namespace.yaml
-  - https://raw.githubusercontent.com/argoproj/argo-cd/v2.0.4/manifests/install.yaml
-  - https://raw.githubusercontent.com/argoproj-labs/applicationset/v0.1.0/manifests/install.yaml
+  - install.yaml
+  - applicationset-install.yaml
   - applicationset.yaml
 patches:
   - path: resources-requests-patch.yaml
