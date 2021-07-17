@@ -2,3 +2,4 @@ namespace: vault
 resources:
   - namespace.yaml
   - vault.yaml
+  - vault-secrets-webhook.yaml
