@@ -1,0 +1,7 @@
+namespace: kuard
+commonLabels:
+  app.kubernetes.io/name: kuard
+resources:
+  - namespace.yaml
+  - serviceaccount.yaml
+  - kuard.yaml
