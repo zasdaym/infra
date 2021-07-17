@@ -18,15 +18,15 @@ spec:
   template:
     spec:
       containers:
-      - image: gcr.io/kuar-demo/kuard-amd64:blue
-        name: kuard-amd64
-        env:
-          - name: SECRET_TEXT
-            value: vault:secret/data/kuard#SECRET_TEXT
-        ports:
-          - containerPort: 8080
-            name: web
-        resources:
-          requests:
-            memory: 32Mi
-        serviceAccountName: kuard
+        - image: gcr.io/kuar-demo/kuard-amd64:blue
+          name: kuard-amd64
+          env:
+            - name: SECRET_TEXT
+              value: vault:secret/data/kuard#SECRET_TEXT
+          ports:
+            - containerPort: 8080
+              name: web
+          resources:
+            requests:
+              memory: 32Mi
+      serviceAccountName: kuard
