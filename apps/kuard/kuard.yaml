@@ -18,6 +18,7 @@ spec:
   template:
     metadata:
       annotations:
+        vault.security.banzaicloud.io/vault-addr: "https://vault.vault:8200"
         vault.security.banzaicloud.io/vault-skip-verify: "true"
     spec:
       containers:
