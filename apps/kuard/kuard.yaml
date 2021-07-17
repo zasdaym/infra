@@ -16,6 +16,9 @@ metadata:
 spec:
   replicas: 1
   template:
+    metadata:
+      annotations:
+        vault.security.banzaicloud.io/vault-skip-verify: "true"
     spec:
       containers:
         - image: gcr.io/kuar-demo/kuard-amd64:blue
