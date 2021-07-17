@@ -20,13 +20,11 @@ spec:
       annotations:
         vault.security.banzaicloud.io/vault-addr: "http://vault.vault:8200"
         vault.security.banzaicloud.io/vault-skip-verify: "true"
+        vault.security.banzaicloud.io/vault-env-from-path: "secret/data/kuard"
     spec:
       containers:
         - image: gcr.io/kuar-demo/kuard-amd64:blue
           name: kuard-amd64
-          env:
-            - name: SECRET_TEXT
-              value: vault:secret/data/kuard#SECRET_TEXT
           ports:
             - containerPort: 8080
               name: web
