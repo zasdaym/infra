@@ -1,3 +1,8 @@
 namespace: kube-system
 resources:
-  - https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.16.0/controller.yaml
+  - sealed-secrets.yaml
+patches:
+  - path: deployment-patch.yaml
+    target:
+      kind: Deployment
+
