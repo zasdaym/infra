@@ -8,9 +8,9 @@ spec:
       name: letsencrypt-staging-account-key
     server: https://acme-staging-v02.api.letsencrypt.org/directory
     solvers:
-      dns01:
-        cloudflare:
-          apiTokenSecretRef:
-            name: zasdaym-cloudflare-api-token
-            key: api-token
-            
+      - dns01:
+          cloudflare:
+            apiTokenSecretRef:
+              name: zasdaym-cloudflare-api-token
+              key: api-token
+              
