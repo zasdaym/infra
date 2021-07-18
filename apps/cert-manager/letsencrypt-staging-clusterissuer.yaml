@@ -4,6 +4,8 @@ metadata:
   name: letsencrypt-staging
 spec:
   acme:
+    privateKeySecretRef:
+      name: letsencrypt-staging-account-key
     server: https://acme-staging-v02.api.letsencrypt.org/directory
     solvers:
       dns01:
