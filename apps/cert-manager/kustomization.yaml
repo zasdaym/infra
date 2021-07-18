@@ -1,2 +1,4 @@
 resources:
 - cert-manager.yaml
+- zasdaym-cloudflare-api-token-sealedsecret.yaml
+- letsencrypt-staging-clusterissuer.yaml
