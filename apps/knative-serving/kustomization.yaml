@@ -1,0 +1,12 @@
+resources:
+  - kourier.yaml
+  - serving-core.yaml
+patches:
+  - path: config-network-configmap-patch.yaml
+    target:
+      kind: ConfigMap
+      name: config-network
+  - path: kourier-service-patch.yaml
+    target:
+      kind: Service
+      name: kourier
