@@ -10,7 +10,7 @@ spec:
         vault.security.banzaicloud.io/vault-addr: "http://vault.vault:8200"
         vault.security.banzaicloud.io/vault-skip-verify: "true"
         vault.security.banzaicloud.io/vault-env-from-path: "secret/data/kuard"
-      name: kuard
+      name: kuard-main
     spec:
       containers:
         - image: gcr.io/knative-samples/helloworld-go
