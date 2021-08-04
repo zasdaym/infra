@@ -1,0 +1,11 @@
+{
+  "name": "knative-serving",
+  "ignoreDifferences": [
+    {
+      "kind": "ClusterRole",
+      "jsonPointers": [
+        "/spec/rules"
+      ]
+    }
+  ]
+}
