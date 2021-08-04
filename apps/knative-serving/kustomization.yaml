@@ -1,7 +1,12 @@
 resources:
   - kourier.yaml
   - serving-core.yaml
+  - net-certmanager.yaml
 patches:
+  - path: config-certmanager-configmap-patch.yaml
+    target:
+      kind: ConfigMap
+      name: config-certmanager
   - path: config-domain-configmap-patch.yaml
     target:
       kind: ConfigMap
