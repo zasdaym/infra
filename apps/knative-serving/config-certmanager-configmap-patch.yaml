@@ -1,0 +1,6 @@
+- op: add
+  path: /data
+  value:
+    issuerRef: |
+      kind: ClusterIssuer
+      name: letsencrypt-staging
