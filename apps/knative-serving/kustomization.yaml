@@ -2,6 +2,10 @@ resources:
   - kourier.yaml
   - serving-core.yaml
 patches:
+  - path: config-domain-configmap-patch.yaml
+    target:
+      kind: ConfigMap
+      name: config-domain
   - path: config-network-configmap-patch.yaml
     target:
       kind: ConfigMap
