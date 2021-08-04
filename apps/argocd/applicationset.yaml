@@ -8,7 +8,7 @@ spec:
         repoURL: https://github.com/zasdaym/gitops.git
         revision: HEAD
         files:
-        - path: 'apps/**/config.json'
+          - path: 'apps/**/config.json'
   template:
     metadata:
       name: '{{name}}'
@@ -25,4 +25,3 @@ spec:
         automated:
           prune: true
           selfHeal: true
-      ignoreDifference: '{{ignoreDifference}}'

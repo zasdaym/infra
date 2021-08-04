@@ -1,4 +1,3 @@
 {
-  "name": "external-dns",
-  "ignoreDifferences": {}
+  "name": "external-dns"
 }
