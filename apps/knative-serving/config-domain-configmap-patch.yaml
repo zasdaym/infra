@@ -1,4 +1,0 @@
-- op: add
-  path: /data
-  value:
-    knative.zasdaym.my.id: ""

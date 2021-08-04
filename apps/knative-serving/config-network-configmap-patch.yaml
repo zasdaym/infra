@@ -1,5 +1,0 @@
-- op: add
-  path: /data
-  value:
-    autoTLS: Enabled
-    ingress.class: kourier.ingress.networking.knative.dev
