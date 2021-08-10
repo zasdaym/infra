@@ -2,6 +2,7 @@ resources:
   - kourier.yaml
   - serving-core.yaml
   - net-certmanager.yaml
+  - serving-nscert.yaml
 patches:
   - path: config-certmanager-configmap-patch.yaml
     target:

@@ -1,0 +1,6 @@
+- op: add
+  path: /spec/template/spec/containers/0/args
+  value:
+    - --base-id 1
+    - -c /tmp/config/envoy-bootstrap.yaml
+    - --log-level error
