@@ -2,16 +2,14 @@
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
-  name: kuard
+  name: blue
 spec:
   template:
     metadata:
       annotations:
-        autoscaling.knative.dev/minScale: "1"
         vault.security.banzaicloud.io/vault-addr: "http://vault.vault:8200"
         vault.security.banzaicloud.io/vault-skip-verify: "true"
         vault.security.banzaicloud.io/vault-env-from-path: "secret/data/kuard"
-      name: kuard-v2
     spec:
       containers:
         - image: gcr.io/kuar-demo/kuard-amd64:blue
