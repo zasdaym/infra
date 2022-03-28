@@ -1,6 +1,0 @@
-- op: add
-  path: /spec/template/spec/containers/0/args/0
-  value: --dns01-recursive-nameservers="172.22.3.133:53" 
-- op: add
-  path: /spec/template/spec/containers/0/args/0
-  value: --dns01-recursive-nameservers-only

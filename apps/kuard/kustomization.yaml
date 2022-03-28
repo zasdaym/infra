@@ -1,4 +1,0 @@
-namespace: kuard
-resources:
-  - namespace.yaml
-  - serviceaccount.yaml

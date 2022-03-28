@@ -1,8 +1,0 @@
-namespace: kube-system
-resources:
-  - sealed-secrets.yaml
-patches:
-  - path: deployment-patch.yaml
-    target:
-      kind: Deployment
-

@@ -1,9 +1,0 @@
-resources:
-  - cert-manager.yaml
-  - zasdaym-cloudflare-api-token-sealedsecret.yaml
-  - letsencrypt-staging-clusterissuer.yaml
-patches:
-  - path: cert-manager-deployment-patch.yaml
-    target:
-      kind: Deployment
-      name: cert-manager
