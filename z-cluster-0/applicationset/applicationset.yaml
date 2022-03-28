@@ -13,7 +13,7 @@ spec:
           - path: 'z-cluster-0/*'
   template:
     metadata:
-      name: 'z-cluster-0-{{path.basename}}'
+      name: '{{path.basename}}'
     spec:
       project: default
       source:
