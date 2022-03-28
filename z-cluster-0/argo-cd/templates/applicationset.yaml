@@ -1,0 +1,24 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: z-cluster-0
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/zasdaym/gitops
+        revision: HEAD
+        directories:
+          - path: z-cluster-0/*
+  template:
+    metadata:
+      name: 'z-cluster-0-{{path.basename}}'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/zasdaym/gitops
+        targetRevision: HEAD
+        path: '{{path}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{path.basename}}'
