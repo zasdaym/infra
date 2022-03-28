@@ -1,12 +1,11 @@
 argo-cd:
-  nameOverride: argo-cd
-  fullnameOverride: argo-cd
+  fullnameOverride: argocd
   dex:
     enabled: false
   notifications:
     enabled: false
   server:
     config:
-      url: http://argo-cd.zasda.test
+      url: http://argocd.zasda.test
     extraArgs:
       - --insecure

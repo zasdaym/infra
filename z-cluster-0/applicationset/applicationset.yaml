@@ -3,7 +3,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: z-cluster-0
-  namespace: argo-cd
+  namespace: argocd
 spec:
   generators:
     - git:
