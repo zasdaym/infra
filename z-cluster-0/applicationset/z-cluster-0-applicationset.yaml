@@ -10,7 +10,7 @@ spec:
         repoURL: https://github.com/zasdaym/gitops
         revision: HEAD
         directories:
-          - path: z-cluster-0/*
+          - path: 'z-cluster-0/*'
   template:
     metadata:
       name: 'z-cluster-0-{{path.basename}}'
