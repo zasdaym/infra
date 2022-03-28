@@ -3,3 +3,6 @@ argo-cd:
     enabled: false
   notifications:
     enabled: false
+  server:
+    extraArgs:
+      - --insecure
