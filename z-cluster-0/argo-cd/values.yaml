@@ -1,4 +1,5 @@
 argo-cd:
+  nameOverride: argo-cd
   fullnameOverride: argo-cd
   dex:
     enabled: false
