@@ -2,11 +2,11 @@
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
-  name: argo-cd
+  name: argo-cd-server
   namespace: argo-cd
 spec:
   gateways:
-    - argo-cd
+    - argo-cd-server
   hosts:
     - argo-cd.zasda.test
   http:
@@ -15,6 +15,6 @@ spec:
             prefix: /
       route:
         - destination:
-            host: z-cluster-0-argo-cd-argocd-server
+            host: argo-cd-server
             port:
               number: 80
