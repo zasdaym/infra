@@ -4,5 +4,7 @@ argo-cd:
   notifications:
     enabled: false
   server:
+    config:
+      url: http://argo-cd.zasda.test
     extraArgs:
       - --insecure
