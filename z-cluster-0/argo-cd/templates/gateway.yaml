@@ -1,0 +1,16 @@
+---
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: argo-cd
+  namespace: argo-cd
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - hosts:
+    - argo-cd.zasda.test
+    port:
+      name: http
+      number: 80
+      protocol: HTTP
