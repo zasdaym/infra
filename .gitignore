@@ -1,1 +1,14 @@
+# macOS
+.DS_Store
+
+# helm
 charts/
+
+# terragrunt
+.terraform/
+*.tfstate
+*.tfstate.backup
+.terragrunt-cache/
+
+# env
+.env
