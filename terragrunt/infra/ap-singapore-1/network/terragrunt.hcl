@@ -4,7 +4,7 @@ include "root" {
 }
 
 terraform {
-  source = "../../../modules/network//."
+  source = "${path_relative_from_include()}/modules//network"
 }
 
 inputs = {
