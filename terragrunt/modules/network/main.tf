@@ -27,6 +27,37 @@ resource "oci_core_security_list" "public" {
 
   display_name = "public"
 
+  ingress_security_rules {
+    source   = "0.0.0.0/0"
+    protocol = "6"
+
+    tcp_options {
+
+      min = 22
+      max = 22
+    }
+  }
+
+  ingress_security_rules {
+    source   = "0.0.0.0/0"
+    protocol = "6"
+
+    tcp_options {
+      min = 80
+      max = 80
+    }
+  }
+
+  ingress_security_rules {
+    source   = "0.0.0.0/0"
+    protocol = "6"
+
+    tcp_options {
+      min = 443
+      max = 443
+    }
+  }
+
   egress_security_rules {
     destination = "0.0.0.0/0"
     protocol    = "all"
