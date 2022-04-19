@@ -7,9 +7,9 @@ locals {
   account_vars = read_terragrunt_config(find_in_parent_folders("account.hcl"))
   region_vars  = read_terragrunt_config(find_in_parent_folders("region.hcl"))
 
-  name           = local.account_vars.locals.name
-  compartment_id = local.account_vars.locals.compartment_id
-  region         = local.region_vars.locals.region
+  name                 = local.account_vars.locals.name
+  compartment_id       = local.account_vars.locals.compartment_id
+  region               = local.region_vars.locals.region
   availability_domains = local.region_vars.locals.availability_domains
 
 }
