@@ -29,3 +29,18 @@ resource "oci_core_instance" "this" {
     user_data = var.user_data
   }
 }
+
+data "cloudflare_zone" "this" {
+  count = var.enable_domain_mapping ? 1 : 0
+
+  name = var.base_domain_name
+}
+
+resource "cloudflare_record" "this" {
+  count = var.enable_domain_mapping ? 1 : 0
+
+  zone_id = data.cloudflare_zone.this[0].id
+  name    = var.sub_domain_name
+  type    = "A"
+  value   = oci_core_instance.this.public_ip
+}

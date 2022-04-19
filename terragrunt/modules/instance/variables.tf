@@ -47,3 +47,21 @@ variable "user_data" {
   description = "base64-encoded cloud-init user data"
   default     = ""
 }
+
+variable "enable_domain_mapping" {
+  type        = bool
+  description = "enable cloudflare record mapping to instance public ip"
+  default     = false
+}
+
+variable "base_domain_name" {
+  type        = string
+  default     = ""
+  description = "cloudflare zone name for domain mapping"
+}
+
+variable "sub_domain_name" {
+  type        = string
+  default     = ""
+  description = "the host name for cloudflare dns record mapping, will be combined with base_domain_name"
+}
