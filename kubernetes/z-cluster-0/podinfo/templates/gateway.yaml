@@ -1,0 +1,16 @@
+---
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: podinfo
+  namespace: podinfo
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - hosts:
+        - podinfo.zasda.test
+      port:
+        name: http
+        number: 80
+        protocol: HTTP
