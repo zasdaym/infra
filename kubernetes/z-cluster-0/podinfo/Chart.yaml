@@ -1,6 +1,0 @@
-name: podinfo
-version: 1.0.0
-dependencies:
-  - name: podinfo
-    repository: https://stefanprodan.github.io/podinfo
-    version: 6.1.4
