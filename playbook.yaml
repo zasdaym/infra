@@ -1,0 +1,18 @@
+- name: General configuration
+  become: yes
+  hosts: all
+  tasks:
+    - name: Set timezone
+      community.general.timezone:
+        name: Asia/Jakarta
+    - name: Install standard packages
+      ansible.builtin.apt:
+        name:
+          - aria2
+          - dnsutils
+          - curl
+          - htop
+          - iftop
+          - jigdo-file
+          - kitty-terminfo
+          - tcptraceroute

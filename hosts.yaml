@@ -1,0 +1,4 @@
+all:
+  hosts:
+    z-srv-0:
+    z-srv-1:
