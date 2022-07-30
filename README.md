@@ -1,1 +1,3 @@
-Personal GitOps repository
+# infra
+
+Personal infrastructure configurations.
