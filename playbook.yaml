@@ -16,3 +16,6 @@
           - jigdo-file
           - kitty-terminfo
           - tcptraceroute
+    - name: Install tailscale
+      ansible.builtin.shell: |
+        curl -sL https://tailscale.com/install.sh | bash
