@@ -1,10 +1,12 @@
 - name: General configuration
   become: yes
   hosts: all
+
   tasks:
     - name: Set timezone
       community.general.timezone:
         name: Asia/Jakarta
+
     - name: Install standard packages
       ansible.builtin.apt:
         name:
@@ -17,14 +19,17 @@
           - kitty-terminfo
           - tcptraceroute
           - vim
+
     - name: Install tailscale
       ansible.builtin.shell:
         cmd: curl -sL https://tailscale.com/install.sh | bash
         creates: /usr/bin/tailscale
+
     - name: Add HashiCorp APT repository
       ansible.builtin.get_url:
         url: https://apt.releases.hashicorp.com/gpg
         dest: /etc/apt/trusted.gpg.d/hashicorp.asc
+
     - name: Add HashiCorp repository
       ansible.builtin.apt_repository:
         repo: deb [signed-by=/etc/apt/trusted.gpg.d/hashicorp.asc] https://apt.releases.hashicorp.com jammy main
