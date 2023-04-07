@@ -1,0 +1,15 @@
+---
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+  namespace: knative-serving
+spec:
+  ingress:
+    kourier:
+      enabled: true
+  config:
+    domain:
+      "zasdaym.my.id": ""
+    network:
+      ingress-class: "kourier.ingress.networking.knative.dev"
