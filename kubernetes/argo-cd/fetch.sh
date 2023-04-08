@@ -15,6 +15,7 @@ function main() {
 
     cp "${chart_name}/Chart.yaml" .
     cp -r "${chart_name}/templates" .
+    cp -n "${chart_name}/values.yaml" .
     rm -r "${chart_name}"
     rm -r "${chart_name}-${chart_version}.tgz"
 }
