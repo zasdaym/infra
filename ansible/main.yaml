@@ -8,14 +8,12 @@
         name: Asia/Jakarta
 
     - name: Install standard packages
-      ansible.builtin.apt:
+      ansible.builtin.package:
         name:
           - aria2
-          - dnsutils
+          - btop
           - curl
-          - htop
-          - iftop
-          - jigdo-file
+          - dnsutils
           - tcptraceroute
           - vim
 
@@ -23,12 +21,3 @@
       ansible.builtin.shell:
         cmd: curl -sL https://tailscale.com/install.sh | bash
         creates: /usr/bin/tailscale
-
-    - name: Add HashiCorp GPG public key
-      ansible.builtin.get_url:
-        url: https://apt.releases.hashicorp.com/gpg
-        dest: /etc/apt/trusted.gpg.d/hashicorp.asc
-
-    - name: Add HashiCorp repository
-      ansible.builtin.apt_repository:
-        repo: deb [signed-by=/etc/apt/trusted.gpg.d/hashicorp.asc] https://apt.releases.hashicorp.com jammy main
