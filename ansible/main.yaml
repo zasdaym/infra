@@ -35,6 +35,11 @@
       notify:
         - Restart docker
 
+    - name: Sync compose directory
+      synchronize:
+        src: compose/
+        dest: /home/zasda/compose/
+
   handlers:
     - name: Restart docker
       systemd:

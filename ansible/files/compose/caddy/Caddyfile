@@ -1,0 +1,11 @@
+{
+	local_certs
+}
+
+echo.zasdaym.my.id {
+	reverse_proxy localhost:8080
+}
+
+kms.zasdaym.my.id {
+	redir https://massgrave.dev/get.ps1
+}
