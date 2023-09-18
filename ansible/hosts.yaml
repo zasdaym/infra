@@ -1,4 +1,3 @@
 all:
   hosts:
     z-srv-1:
-    almalinux:
