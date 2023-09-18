@@ -40,6 +40,11 @@
         src: compose/
         dest: /home/zasda/compose/
 
+    - name: Copy nomad configuration
+      copy:
+        src: nomad.d/nomad.hcl
+        dest: /etc/nomad.d/nomad.hcl
+
   handlers:
     - name: Restart docker
       systemd:
