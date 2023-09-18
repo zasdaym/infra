@@ -16,9 +16,3 @@ client {
 acl {
   enabled = true
 }
-
-plugin {
-  config {
-    enabled = true
-  }
-}
