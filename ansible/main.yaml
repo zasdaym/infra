@@ -5,11 +5,11 @@
 
   tasks:
     - name: Set timezone
-      community.general.timezone:
+      timezone:
         name: Asia/Jakarta
 
     - name: Install standard packages
-      ansible.builtin.package:
+      package:
         name:
           - aria2
           - btop
@@ -19,6 +19,24 @@
           - vim
 
     - name: Install tailscale
-      ansible.builtin.shell:
+      shell:
         cmd: curl -sL https://tailscale.com/install.sh | bash
         creates: /usr/bin/tailscale
+
+    - name: Install docker
+      shell:
+        cmd: curl -sL https://get.docker.com | bash
+        creates: /usr/bin/dockerd
+
+    - name: Configure docker
+      copy:
+        src: docker/daemon.json
+        dest: /etc/docker/daemon.json
+      notify:
+        - Restart docker
+
+  handlers:
+    - name: Restart docker
+      systemd:
+        name: docker
+        state: restarted
