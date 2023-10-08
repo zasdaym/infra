@@ -1,2 +1,9 @@
 argo-cd:
-  fullnameOverride: argo-cd
+  server:
+    ingress:
+      annotations:
+        kubernetes.io/ingress.class: istio
+      enabled: true
+      hosts:
+        - argo-cd.zasdaym.my.id
+      ingressClassName: istio

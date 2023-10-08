@@ -11,11 +11,18 @@ volumes:
   postgres_data: {}
 
 services:
+  blocky:
+    <<: *x-service-default
+    image: spx01/blocky:v0.22
+    volumes:
+      - ./blocky/config.yml:/app/config.yml:ro
+
   caddy:
     <<: *x-service-default
     image: caddy:2.7.4
     volumes:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - /srv/www:/srv/www:ro
       - caddy_config:/config
       - caddy_data:/data
 

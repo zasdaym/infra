@@ -39,6 +39,8 @@
       synchronize:
         src: compose/
         dest: /home/zasda/compose/
+      notify:
+        - Restart caddy
 
     - name: Copy nomad configuration
       copy:
@@ -50,3 +52,11 @@
       systemd:
         name: docker
         state: restarted
+
+    - name: Compose up
+      shell:
+        cmd: cd /home/zasda/compose && docker compose up -d --remove-orphans
+
+    - name: Restart caddy
+      shell:
+        cmd: cd /home/zasda/compose && docker compose restart caddy

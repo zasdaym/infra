@@ -1,4 +1,4 @@
-# Copyright 2022 The Tekton Authors
+# Copyright 2022 The Knative Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,10 +18,9 @@ metadata:
   name: operator-webhook-certs
   namespace: default
   labels:
-    app.kubernetes.io/component: webhook
-    operator.knative.dev/release: "v1.9.4"
-    app.kubernetes.io/version: "1.9.4"
-    app.kubernetes.io/part-of: knative-operator
+    app.kubernetes.io/component: operator-webhook
+    app.kubernetes.io/version: "1.11.6"
+    app.kubernetes.io/name: knative-operator
 # The data is populated at install time.
 
 ---
@@ -45,9 +44,8 @@ metadata:
   name: operator-webhook
   namespace: default
   labels:
-    operator.knative.dev/release: "v1.9.4"
     app.kubernetes.io/component: operator-webhook
-    app.kubernetes.io/version: "1.9.4"
+    app.kubernetes.io/version: "1.11.6"
     app.kubernetes.io/name: knative-operator
 spec:
   selector:
@@ -57,14 +55,12 @@ spec:
   template:
     metadata:
       annotations:
-        cluster-autoscaler.kubernetes.io/safe-to-evict: "false"
         sidecar.istio.io/inject: "false"
       labels:
         app: operator-webhook
         role: operator-webhook
-        operator.knative.dev/release: "v1.9.4"
         app.kubernetes.io/component: operator-webhook
-        app.kubernetes.io/version: "1.9.4"
+        app.kubernetes.io/version: "1.11.6"
         app.kubernetes.io/name: knative-operator
     spec:
       # To avoid node becoming SPOF, spread our replicas to different nodes.
@@ -74,7 +70,7 @@ spec:
             - podAffinityTerm:
                 labelSelector:
                   matchLabels:
-                    app: webhook
+                    app: operator-webhook
                 topologyKey: kubernetes.io/hostname
               weight: 100
       serviceAccountName: operator-webhook
@@ -82,7 +78,7 @@ spec:
         - name: operator-webhook
           # This is the Go import path for the binary that is containerized
           # and substituted here.
-          image: gcr.io/knative-releases/knative.dev/operator/cmd/webhook@sha256:3d827626e563b24b8c001424d48bf8f07725223a07d0478148f3c021b4e9e647
+          image: gcr.io/knative-releases/knative.dev/operator/cmd/webhook@sha256:e64c7d656038f08897d997b87307070893a87014f42546a46ce33e9f48f1a32f
           resources:
             requests:
               cpu: 100m
@@ -107,8 +103,12 @@ spec:
               value: operator-webhook
             - name: WEBHOOK_PORT
               value: "8443"
+            - name: WEBHOOK_SECRET_NAME
+              value: operator-webhook-certs
             - name: METRICS_DOMAIN
               value: knative.dev/operator
+            - name: KUBERNETES_MIN_VERSION
+              value: ""
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
@@ -165,9 +165,8 @@ kind: Service
 metadata:
   labels:
     role: operator-webhook
-    operator.knative.dev/release: "v1.9.4"
     app.kubernetes.io/component: operator-webhook
-    app.kubernetes.io/version: "1.9.4"
+    app.kubernetes.io/version: "1.11.6"
     app.kubernetes.io/name: knative-operator
   name: operator-webhook
   namespace: default
@@ -206,9 +205,8 @@ kind: CustomResourceDefinition
 metadata:
   name: knativeeventings.operator.knative.dev
   labels:
-    operator.knative.dev/release: "v1.9.4"
-    app.kubernetes.io/version: "1.9.4"
-    app.kubernetes.io/part-of: knative-operator
+    app.kubernetes.io/version: "1.11.6"
+    app.kubernetes.io/name: knative-operator
 spec:
   group: operator.knative.dev
   versions:
@@ -473,6 +471,9 @@ spec:
                               type: string
                           type: object
                         type: array
+                      hostNetwork:
+                        description: Use the host's network namespace if true. Make sure to understand the security implications if you want to enable it. When hostNetwork is enabled, this will set dnsPolicy to ClusterFirstWithHostNet automatically.
+                        type: boolean
                       topologySpreadConstraints:
                         description: If specified, the pod's topology spread constraints.
                         items:
@@ -1138,6 +1139,9 @@ spec:
                               type: string
                           type: object
                         type: array
+                      hostNetwork:
+                        description: Use the host's network namespace if true. Make sure to understand the security implications if you want to enable it. When hostNetwork is enabled, this will set dnsPolicy to ClusterFirstWithHostNet automatically.
+                        type: boolean
                       topologySpreadConstraints:
                         description: If specified, the pod's topology spread constraints.
                         items:
@@ -1762,9 +1766,8 @@ kind: CustomResourceDefinition
 metadata:
   name: knativeservings.operator.knative.dev
   labels:
-    operator.knative.dev/release: "v1.9.4"
-    app.kubernetes.io/version: "1.9.4"
-    app.kubernetes.io/part-of: knative-operator
+    app.kubernetes.io/version: "1.11.6"
+    app.kubernetes.io/name: knative-operator
 spec:
   group: operator.knative.dev
   versions:
@@ -2040,6 +2043,9 @@ spec:
                               type: string
                           type: object
                         type: array
+                      hostNetwork:
+                        description: Use the host's network namespace if true. Make sure to understand the security implications if you want to enable it. When hostNetwork is enabled, this will set dnsPolicy to ClusterFirstWithHostNet automatically.
+                        type: boolean
                       topologySpreadConstraints:
                         description: If specified, the pod's topology spread constraints.
                         items:
@@ -2705,6 +2711,9 @@ spec:
                               type: string
                           type: object
                         type: array
+                      hostNetwork:
+                        description: Use the host's network namespace if true. Make sure to understand the security implications if you want to enable it. When hostNetwork is enabled, this will set dnsPolicy to ClusterFirstWithHostNet automatically.
+                        type: boolean
                       topologySpreadConstraints:
                         description: If specified, the pod's topology spread constraints.
                         items:
@@ -3399,9 +3408,8 @@ kind: ClusterRole
 metadata:
   name: knative-serving-operator-aggregated
   labels:
-    operator.knative.dev/release: "v1.9.4"
-    app.kubernetes.io/version: "1.9.4"
-    app.kubernetes.io/part-of: knative-operator
+    app.kubernetes.io/version: "1.11.6"
+    app.kubernetes.io/name: knative-operator
 aggregationRule:
   clusterRoleSelectors:
     # This (along with escalate below) allows the Operator to pick up any
@@ -3416,9 +3424,8 @@ kind: ClusterRole
 metadata:
   name: knative-serving-operator-aggregated-stable
   labels:
-    operator.knative.dev/release: "v1.9.4"
-    app.kubernetes.io/version: "1.9.4"
-    app.kubernetes.io/part-of: knative-operator
+    app.kubernetes.io/version: "1.11.6"
+    app.kubernetes.io/name: knative-operator
 aggregationRule:
   clusterRoleSelectors:
     # This (along with escalate below) allows the Operator to pick up any
@@ -3433,9 +3440,8 @@ kind: ClusterRole
 metadata:
   name: knative-eventing-operator-aggregated
   labels:
-    operator.knative.dev/release: "v1.9.4"
-    app.kubernetes.io/version: "1.9.4"
-    app.kubernetes.io/part-of: knative-operator
+    app.kubernetes.io/version: "1.11.6"
+    app.kubernetes.io/name: knative-operator
 aggregationRule:
   clusterRoleSelectors:
     # This (along with escalate below) allows the Operator to pick up any
@@ -3450,9 +3456,8 @@ kind: ClusterRole
 metadata:
   name: knative-eventing-operator-aggregated-stable
   labels:
-    operator.knative.dev/release: "v1.9.4"
-    app.kubernetes.io/version: "1.9.4"
-    app.kubernetes.io/part-of: knative-operator
+    app.kubernetes.io/version: "1.11.6"
+    app.kubernetes.io/name: knative-operator
 aggregationRule:
   clusterRoleSelectors:
     # This (along with escalate below) allows the Operator to pick up any
@@ -3482,9 +3487,8 @@ apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: knative-serving-operator
   labels:
-    operator.knative.dev/release: "v1.9.4"
-    app.kubernetes.io/version: "1.9.4"
-    app.kubernetes.io/part-of: knative-operator
+    app.kubernetes.io/version: "1.11.6"
+    app.kubernetes.io/name: knative-operator
 rules:
   - apiGroups:
       - operator.knative.dev
@@ -3723,9 +3727,8 @@ apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: knative-eventing-operator
   labels:
-    operator.knative.dev/release: "v1.9.4"
-    app.kubernetes.io/version: "1.9.4"
-    app.kubernetes.io/part-of: knative-operator
+    app.kubernetes.io/version: "1.11.6"
+    app.kubernetes.io/name: knative-operator
 rules:
   - apiGroups:
       - operator.knative.dev
@@ -4102,9 +4105,8 @@ metadata:
   name: knative-operator
   namespace: default
   labels:
-    operator.knative.dev/release: "v1.9.4"
-    app.kubernetes.io/version: "1.9.4"
-    app.kubernetes.io/part-of: knative-operator
+    app.kubernetes.io/version: "1.11.6"
+    app.kubernetes.io/name: knative-operator
 
 ---
 # Copyright 2020 The Knative Authors
@@ -4127,9 +4129,8 @@ kind: ClusterRoleBinding
 metadata:
   name: knative-serving-operator
   labels:
-    operator.knative.dev/release: "v1.9.4"
-    app.kubernetes.io/version: "1.9.4"
-    app.kubernetes.io/part-of: knative-operator
+    app.kubernetes.io/version: "1.11.6"
+    app.kubernetes.io/name: knative-operator
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -4145,9 +4146,8 @@ kind: ClusterRoleBinding
 metadata:
   name: knative-eventing-operator
   labels:
-    operator.knative.dev/release: "v1.9.4"
-    app.kubernetes.io/version: "1.9.4"
-    app.kubernetes.io/part-of: knative-operator
+    app.kubernetes.io/version: "1.11.6"
+    app.kubernetes.io/name: knative-operator
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -4178,9 +4178,8 @@ metadata:
   namespace: default
   name: knative-operator-webhook
   labels:
-    eventing.knative.dev/release: devel
-    app.kubernetes.io/version: "1.9.4"
-    app.kubernetes.io/part-of: knative-operator
+    app.kubernetes.io/version: "1.11.6"
+    app.kubernetes.io/name: knative-operator
 rules:
   # For manipulating certs into secrets.
   - apiGroups:
@@ -4200,9 +4199,8 @@ kind: ClusterRole
 metadata:
   name: knative-operator-webhook
   labels:
-    eventing.knative.dev/release: devel
-    app.kubernetes.io/version: "1.9.4"
-    app.kubernetes.io/part-of: knative-operator
+    app.kubernetes.io/version: "1.11.6"
+    app.kubernetes.io/name: knative-operator
 rules:
   # For watching logging configuration and getting certs.
   - apiGroups:
@@ -4292,9 +4290,8 @@ metadata:
   name: operator-webhook
   namespace: default
   labels:
-    operator.knative.dev/release: "v1.9.4"
-    app.kubernetes.io/version: "1.9.4"
-    app.kubernetes.io/part-of: knative-operator
+    app.kubernetes.io/version: "1.11.6"
+    app.kubernetes.io/name: knative-operator
 
 ---
 # Copyright 2022 The Knative Authors
@@ -4317,9 +4314,8 @@ metadata:
   namespace: default
   name: operator-webhook
   labels:
-    eventing.knative.dev/release: devel
-    app.kubernetes.io/version: "1.9.4"
-    app.kubernetes.io/part-of: knative-operator
+    app.kubernetes.io/version: "1.11.6"
+    app.kubernetes.io/name: knative-operator
 subjects:
   - kind: ServiceAccount
     name: operator-webhook
@@ -4334,9 +4330,8 @@ kind: ClusterRoleBinding
 metadata:
   name: operator-webhook
   labels:
-    operator.knative.dev/release: "v1.9.4"
-    app.kubernetes.io/version: "1.9.4"
-    app.kubernetes.io/part-of: knative-operator
+    app.kubernetes.io/version: "1.11.6"
+    app.kubernetes.io/name: knative-operator
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -4366,9 +4361,8 @@ kind: ClusterRoleBinding
 metadata:
   name: knative-serving-operator-aggregated
   labels:
-    operator.knative.dev/release: "v1.9.4"
-    app.kubernetes.io/version: "1.9.4"
-    app.kubernetes.io/part-of: knative-operator
+    app.kubernetes.io/version: "1.11.6"
+    app.kubernetes.io/name: knative-operator
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -4383,9 +4377,8 @@ kind: ClusterRoleBinding
 metadata:
   name: knative-serving-operator-aggregated-stable
   labels:
-    operator.knative.dev/release: "v1.9.4"
-    app.kubernetes.io/version: "1.9.4"
-    app.kubernetes.io/part-of: knative-operator
+    app.kubernetes.io/version: "1.11.6"
+    app.kubernetes.io/name: knative-operator
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -4400,9 +4393,8 @@ kind: ClusterRoleBinding
 metadata:
   name: knative-eventing-operator-aggregated
   labels:
-    operator.knative.dev/release: "v1.9.4"
-    app.kubernetes.io/version: "1.9.4"
-    app.kubernetes.io/part-of: knative-operator
+    app.kubernetes.io/version: "1.11.6"
+    app.kubernetes.io/name: knative-operator
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -4417,9 +4409,8 @@ kind: ClusterRoleBinding
 metadata:
   name: knative-eventing-operator-aggregated-stable
   labels:
-    operator.knative.dev/release: "v1.9.4"
-    app.kubernetes.io/version: "1.9.4"
-    app.kubernetes.io/part-of: knative-operator
+    app.kubernetes.io/version: "1.11.6"
+    app.kubernetes.io/name: knative-operator
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -4450,9 +4441,8 @@ metadata:
   name: config-logging
   namespace: default
   labels:
-    operator.knative.dev/release: "v1.9.4"
-    app.kubernetes.io/version: "1.9.4"
-    app.kubernetes.io/part-of: knative-operator
+    app.kubernetes.io/version: "1.11.6"
+    app.kubernetes.io/name: knative-operator
 data:
   _example: |
     ################################
@@ -4514,9 +4504,8 @@ metadata:
   name: config-observability
   namespace: default
   labels:
-    operator.knative.dev/release: "v1.9.4"
-    app.kubernetes.io/version: "1.9.4"
-    app.kubernetes.io/part-of: knative-operator
+    app.kubernetes.io/version: "1.11.6"
+    app.kubernetes.io/name: knative-operator
 data:
   _example: |
     ################################
@@ -4545,35 +4534,6 @@ data:
     # access to Kibana after setting up kubectl proxy.
     logging.revision-url-template: |
       http://localhost:8001/api/v1/namespaces/knative-monitoring/services/kibana-logging/proxy/app/kibana#/discover?_a=(query:(match:(kubernetes.labels.serving-knative-dev%2FrevisionUID:(query:'${REVISION_UID}',type:phrase))))
-
-    # If non-empty, this enables queue proxy writing request logs to stdout.
-    # The value determines the shape of the request logs and it must be a valid go text/template.
-    # It is important to keep this as a single line. Multiple lines are parsed as separate entities
-    # by most collection agents and will split the request logs into multiple records.
-    #
-    # The following fields and functions are available to the template:
-    #
-    # Request: An http.Request (see https://golang.org/pkg/net/http/#Request)
-    # representing an HTTP request received by the server.
-    #
-    # Response:
-    # struct {
-    #   Code    int       // HTTP status code (see https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml)
-    #   Size    int       // An int representing the size of the response.
-    #   Latency float64   // A float64 representing the latency of the response in seconds.
-    # }
-    #
-    # Revision:
-    # struct {
-    #   Name          string  // Knative revision name
-    #   Namespace     string  // Knative revision namespace
-    #   Service       string  // Knative service name
-    #   Configuration string  // Knative configuration name
-    #   PodName       string  // Name of the pod hosting the revision
-    #   PodIP         string  // IP of the pod hosting the revision
-    # }
-    #
-    logging.request-log-template: '{"httpRequest": {"requestMethod": "{{.Request.Method}}", "requestUrl": "{{js .Request.RequestURI}}", "requestSize": "{{.Request.ContentLength}}", "status": {{.Response.Code}}, "responseSize": "{{.Response.Size}}", "userAgent": "{{js .Request.UserAgent}}", "remoteIp": "{{js .Request.RemoteAddr}}", "serverIp": "{{.Revision.PodIP}}", "referer": "{{js .Request.Referer}}", "latency": "{{.Response.Latency}}s", "protocol": "{{.Request.Proto}}"}, "traceId": "{{index .Request.Header "X-B3-Traceid"}}"}'
 
     # metrics.backend-destination field specifies the system metrics destination.
     # It supports either prometheus (the default) or stackdriver.
@@ -4618,10 +4578,8 @@ metadata:
   name: knative-operator
   namespace: default
   labels:
-    operator.knative.dev/release: "v1.9.4"
     app.kubernetes.io/name: knative-operator
-    app.kubernetes.io/version: "1.9.4"
-    app.kubernetes.io/part-of: knative-operator
+    app.kubernetes.io/version: "1.11.6"
 spec:
   replicas: 1
   selector:
@@ -4634,13 +4592,12 @@ spec:
       labels:
         name: knative-operator
         app.kubernetes.io/name: knative-operator
-        app.kubernetes.io/version: "1.9.4"
-        app.kubernetes.io/part-of: knative-operator
+        app.kubernetes.io/version: "1.11.6"
     spec:
       serviceAccountName: knative-operator
       containers:
         - name: knative-operator
-          image: gcr.io/knative-releases/knative.dev/operator/cmd/operator@sha256:2e73ab904a74aa6c6ed1b8fe6f46d14444918bf486ab5bb0febdb2fbc77aa033
+          image: gcr.io/knative-releases/knative.dev/operator/cmd/operator@sha256:05d7ec65d87b083c5f6551c9d841c4970dd552e47ea7c3db26568a2866687375
           imagePullPolicy: IfNotPresent
           env:
             - name: POD_NAME
@@ -4657,6 +4614,8 @@ spec:
               value: config-logging
             - name: CONFIG_OBSERVABILITY_NAME
               value: config-observability
+            - name: KUBERNETES_MIN_VERSION
+              value: ""
           ports:
             - name: metrics
               containerPort: 9090

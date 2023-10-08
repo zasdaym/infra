@@ -6,6 +6,23 @@ echo.zasdaym.my.id {
 	reverse_proxy localhost:8080
 }
 
+file.zasdaym.my.id {
+	root * /srv/www/file
+	file_server browse
+}
+
 kms.zasdaym.my.id {
 	redir https://massgrave.dev/get.ps1
+}
+
+tsnr.zasdaym.my.id {
+	reverse_proxy localhost:8081
+}
+
+argo-cd.zasdaym.my.id {
+	reverse_proxy 172.18.0.2:31292
+}
+
+dns.zasdaym.my.id {
+	reverse_proxy localhost:8053
 }

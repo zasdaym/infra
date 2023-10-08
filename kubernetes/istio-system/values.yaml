@@ -1,0 +1,8 @@
+base:
+  name: istio
+istiod:
+  name: istio
+gateway:
+  name: istio-ingressgateway
+  service:
+    type: LoadBalancer
