@@ -1,62 +1,73 @@
 - name: General configuration
-  become: yes
-  gather_facts: no
+  become: true
+  gather_facts: true
   hosts: all
 
   tasks:
     - name: Set timezone
-      timezone:
+      community.general.timezone:
         name: Asia/Jakarta
 
     - name: Install standard packages
-      package:
+      ansible.builtin.apt:
         name:
           - aria2
           - btop
           - curl
           - dnsutils
+          - python3-docker
           - tcptraceroute
           - vim
 
-    - name: Install tailscale
-      shell:
-        cmd: curl -sL https://tailscale.com/install.sh | bash
+    - name: Download tailscale installer
+      ansible.builtin.get_url:
+        url: https://tailscale.com/install.sh
+        dest: /tmp/tailscale_install.sh
+        mode: "0644"
+
+    - name: Run tailscale installer
+      ansible.builtin.script:
+        cmd: /tmp/tailscale_install.sh
         creates: /usr/bin/tailscale
 
-    - name: Install docker
-      shell:
-        cmd: curl -sL https://get.docker.com | bash
+    - name: Download docker installer
+      ansible.builtin.get_url:
+        url: https://get.docker.com
+        dest: /tmp/docker_install.sh
+        mode: "0644"
+
+    - name: Run docker installer
+      ansible.builtin.script:
+        cmd: /tmp/docker_install.sh
         creates: /usr/bin/dockerd
 
     - name: Configure docker
-      copy:
+      ansible.builtin.copy:
         src: docker/daemon.json
         dest: /etc/docker/daemon.json
+        mode: "0644"
       notify:
         - Restart docker
 
     - name: Sync compose directory
-      synchronize:
-        src: compose/
-        dest: /home/zasda/compose/
+      ansible.posix.synchronize:
+        src: files/compose
+        dest: /home/zasda/compose
       notify:
-        - Restart caddy
+        - Compose up
 
     - name: Copy nomad configuration
-      copy:
+      ansible.builtin.copy:
         src: nomad.d/nomad.hcl
         dest: /etc/nomad.d/nomad.hcl
+        mode: "0644"
 
   handlers:
     - name: Restart docker
-      systemd:
+      ansible.builtin.systemd:
         name: docker
         state: restarted
 
     - name: Compose up
-      shell:
-        cmd: cd /home/zasda/compose && docker compose up -d --remove-orphans
-
-    - name: Restart caddy
-      shell:
-        cmd: cd /home/zasda/compose && docker compose restart caddy
+      ansible.builtin.shell:
+        cmd: docker compose up --detach --force-recreate --remove-orphans
