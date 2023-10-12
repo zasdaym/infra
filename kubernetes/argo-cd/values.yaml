@@ -1,4 +1,10 @@
 argo-cd:
+  configs:
+    cm:
+      url: https://argo-cd.zasdaym.my.id
+    params:
+      server.disable.auth: true
+      server.insecure: true
   server:
     ingress:
       annotations:
@@ -6,4 +12,3 @@ argo-cd:
       enabled: true
       hosts:
         - argo-cd.zasdaym.my.id
-      ingressClassName: istio
