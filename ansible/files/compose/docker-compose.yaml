@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 x-service-default: &x-service-default
   logging:
@@ -6,8 +6,7 @@ x-service-default: &x-service-default
   network_mode: host
 
 volumes:
-  caddy_config: {}
-  caddy_data: {}
+  grafana_data: {}
   postgres_data: {}
 
 services:
@@ -17,14 +16,15 @@ services:
     volumes:
       - ./blocky/config.yml:/app/config.yml:ro
 
-  caddy:
+  darkhttpd:
     <<: *x-service-default
-    image: caddy:2.7.4
+    image: p3terx/darkhttpd:1.14
+    command:
+      - /var/www/htdocs
+      - --port
+      - "8083"
     volumes:
-      - ./caddy/Caddyfile:/etc/caddy/Caddyfile:ro
-      - /srv/www:/srv/www:ro
-      - caddy_config:/config
-      - caddy_data:/data
+      - /srv/www/file:/var/www/htdocs:ro
 
   dragonfly:
     <<: *x-service-default
@@ -37,6 +37,21 @@ services:
     image: mendhak/http-https-echo:30
     environment:
       HTTP_PORT: "8080"
+
+  grafana:
+    <<: *x-service-default
+    image: grafana/grafana-oss:10.1.4
+    environment:
+      GF_SERVER_ROOT_URL: https://grafana.zasdaym.my.id
+    volumes:
+      - ./grafana/grafana.ini:/etc/grafana/grafana.ini:ro
+      - grafana_data:/var/lib/grafana
+
+  pomerium:
+    <<: *x-service-default
+    image: pomerium/pomerium:0-23-0
+    volumes:
+      - ./pomerium/config.yaml:/pomerium/config.yaml:ro
 
   postgres:
     <<: *x-service-default

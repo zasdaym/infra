@@ -51,8 +51,8 @@
 
     - name: Sync compose directory
       ansible.posix.synchronize:
-        src: files/compose
-        dest: /home/zasda/compose
+        src: files/compose/
+        dest: /home/zasda/compose/
       notify:
         - Compose up
 
@@ -71,3 +71,4 @@
     - name: Compose up
       ansible.builtin.shell:
         cmd: docker compose up --detach --force-recreate --remove-orphans
+        chdir: /home/zasda/compose
