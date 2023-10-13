@@ -15,7 +15,6 @@
           - btop
           - curl
           - dnsutils
-          - python3-docker
           - tcptraceroute
           - vim
 
@@ -49,18 +48,40 @@
       notify:
         - Restart docker
 
-    - name: Sync compose directory
+    - name: Sync blocky config
       ansible.posix.synchronize:
-        src: files/compose/
-        dest: /home/zasda/compose/
+        src: files/blocky/
+        dest: /home/zasda/blocky/
       notify:
-        - Compose up
+        - Start blocky
 
-    - name: Copy nomad configuration
-      ansible.builtin.copy:
-        src: nomad.d/nomad.hcl
-        dest: /etc/nomad.d/nomad.hcl
-        mode: "0644"
+    - name: Sync darkhttpd config
+      ansible.posix.synchronize:
+        src: files/darkhttpd/
+        dest: /home/zasda/darkhttpd/
+      notify:
+        - Start darkhttpd
+
+    - name: Sync echo config
+      ansible.posix.synchronize:
+        src: files/echo/
+        dest: /home/zasda/echo/
+      notify:
+        - Start echo
+
+    - name: Sync grafana config
+      ansible.posix.synchronize:
+        src: files/grafana/
+        dest: /home/zasda/grafana/
+      notify:
+        - Start grafana
+
+    - name: Sync pomerium config
+      ansible.posix.synchronize:
+        src: files/pomerium/
+        dest: /home/zasda/pomerium/
+      notify:
+        - Start pomerium
 
   handlers:
     - name: Restart docker
@@ -68,7 +89,27 @@
         name: docker
         state: restarted
 
-    - name: Compose up
+    - name: Start blocky
       ansible.builtin.shell:
         cmd: docker compose up --detach --force-recreate --remove-orphans
-        chdir: /home/zasda/compose
+        chdir: /home/zasda/blocky
+
+    - name: Start darkhttpd
+      ansible.builtin.shell:
+        cmd: docker compose up --detach --force-recreate --remove-orphans
+        chdir: /home/zasda/darkhttpd
+
+    - name: Start echo
+      ansible.builtin.shell:
+        cmd: docker compose up --detach --force-recreate --remove-orphans
+        chdir: /home/zasda/echo
+
+    - name: Start grafana
+      ansible.builtin.shell:
+        cmd: docker compose up --detach --force-recreate --remove-orphans
+        chdir: /home/zasda/grafana
+
+    - name: Start pomerium
+      ansible.builtin.shell:
+        cmd: docker compose up --detach --force-recreate --remove-orphans
+        chdir: /home/zasda/pomerium

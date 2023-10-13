@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+  pomerium:
+    image: pomerium/pomerium:0-23-0
+    volumes:
+      - ./config.yaml:/pomerium/config.yaml:ro
+    logging:
+      driver: local
+    network_mode: host
