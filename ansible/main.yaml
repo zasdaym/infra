@@ -83,6 +83,13 @@
       notify:
         - Start pomerium
 
+    - name: Sync outline config
+      ansible.posix.synchronize:
+        src: files/outline/
+        dest: /home/zasda/outline/
+      notify:
+        - Start outline
+
   handlers:
     - name: Restart docker
       ansible.builtin.systemd:
@@ -113,3 +120,8 @@
       ansible.builtin.shell:
         cmd: docker compose up --detach --force-recreate --remove-orphans
         chdir: /home/zasda/pomerium
+
+    - name: Start outline
+      ansible.builtin.shell:
+        cmd: docker compose up --detach --force-recreate --remove-orphans
+        chdir: /home/zasda/outline

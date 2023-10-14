@@ -11,7 +11,6 @@ routes:
           or:
             - email:
                 is: zasdaym@gmail.com
-    pass_identity_headers: true
 
   - from: https://dns.zasdaym.my.id
     to: http://localhost:8053
@@ -41,3 +40,11 @@ routes:
   - from: https://tsnr.zasdaym.my.id
     to: http://localhost:8081
     allow_public_unauthenticated_access: true
+
+  - from: https://wiki.zasdaym.my.id
+    to: http://localhost:8082
+    policy:
+      - allow:
+          or:
+            - email:
+                is: zasdaym@gmail.com
