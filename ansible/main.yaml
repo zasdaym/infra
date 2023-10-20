@@ -55,19 +55,19 @@
       notify:
         - Start blocky
 
-    - name: Sync darkhttpd config
-      ansible.posix.synchronize:
-        src: files/darkhttpd/
-        dest: /home/zasda/darkhttpd/
-      notify:
-        - Start darkhttpd
-
     - name: Sync echo config
       ansible.posix.synchronize:
         src: files/echo/
         dest: /home/zasda/echo/
       notify:
         - Start echo
+
+    - name: Sync nginx config
+      ansible.posix.synchronize:
+        src: files/nginx/
+        dest: /home/zasda/nginx/
+      notify:
+        - Start nginx
 
     - name: Sync grafana config
       ansible.posix.synchronize:
@@ -101,15 +101,15 @@
         cmd: docker compose up --detach --force-recreate --remove-orphans
         chdir: /home/zasda/blocky
 
-    - name: Start darkhttpd
-      ansible.builtin.shell:
-        cmd: docker compose up --detach --force-recreate --remove-orphans
-        chdir: /home/zasda/darkhttpd
-
     - name: Start echo
       ansible.builtin.shell:
         cmd: docker compose up --detach --force-recreate --remove-orphans
         chdir: /home/zasda/echo
+
+    - name: Start nginx
+      ansible.builtin.shell:
+        cmd: docker compose up --detach --force-recreate --remove-orphans
+        chdir: /home/zasda/nginx
 
     - name: Start grafana
       ansible.builtin.shell:
