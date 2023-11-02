@@ -1,0 +1,10 @@
+{
+    auto_https off
+}
+
+:8083 {
+    root * /var/www/html
+    file_server {
+        browse
+    }
+}

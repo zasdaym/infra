@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  caddy:
+    image: caddy:2.7.4
+    volumes:
+      - /srv/www/file:/var/www/html:ro
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+    logging:
+      driver: local
+    network_mode: host

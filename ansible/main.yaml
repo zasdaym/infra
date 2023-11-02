@@ -1,6 +1,6 @@
 - name: General configuration
   become: true
-  gather_facts: true
+  gather_facts: false
   hosts: all
 
   tasks:
@@ -62,12 +62,12 @@
       notify:
         - Start echo
 
-    - name: Sync nginx config
+    - name: Sync caddy config
       ansible.posix.synchronize:
-        src: files/nginx/
-        dest: /home/zasda/nginx/
+        src: files/caddy/
+        dest: /home/zasda/caddy/
       notify:
-        - Start nginx
+        - Start caddy
 
     - name: Sync grafana config
       ansible.posix.synchronize:
@@ -106,10 +106,10 @@
         cmd: docker compose up --detach --force-recreate --remove-orphans
         chdir: /home/zasda/echo
 
-    - name: Start nginx
+    - name: Start caddy
       ansible.builtin.shell:
         cmd: docker compose up --detach --force-recreate --remove-orphans
-        chdir: /home/zasda/nginx
+        chdir: /home/zasda/caddy
 
     - name: Start grafana
       ansible.builtin.shell:
