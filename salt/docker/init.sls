@@ -12,3 +12,19 @@ docker_repo:
 docker_install:
   pkg.installed:
     - name: docker-ce
+
+docker_pip:
+  pip.installed:
+    - name: docker
+
+docker_config:
+  file.managed:
+    - name: /etc/docker/daemon.json
+    - source: salt://docker/files/daemon.json
+
+docker_service:
+  service.running:
+    - name: docker
+    - watch:
+        - docker_config
+
