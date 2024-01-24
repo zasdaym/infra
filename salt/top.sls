@@ -5,5 +5,6 @@ base:
     - cadvisor
     - grafana
     - haproxy
+    - ladder
     - node_exporter
     - victoriametrics
