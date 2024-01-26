@@ -7,4 +7,7 @@ base:
     - haproxy
     - ladder
     - node_exporter
+    - pph21
+    - privoxy
     - victoriametrics
+    - warproxy.disabled
