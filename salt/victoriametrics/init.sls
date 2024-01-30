@@ -11,6 +11,7 @@ victoriametrics_container:
         - -promscrape.config=/prometheus.yml
     - binds:
         - /opt/stacks/victoriametrics/prometheus.yml:/prometheus.yml:ro
+        - /opt/stacks/victoriametrics/targets:/targets
         - /opt/stacks/victoriametrics/data:/victoria-metrics-data
     - network_mode: host
     - watch:

@@ -1,17 +1,8 @@
 scrape_configs:
-  - job_name: cadvisor
-    static_configs:
-      - targets:
-          - localhost:8080
-  - job_name: node_exporter
-    static_configs:
-      - targets:
-          - localhost:9100
-  - job_name: pomerium
-    static_configs:
-      - targets:
-          - localhost:9090
-  - job_name: victorialogs
-    static_configs:
-      - targets:
-          - localhost:9428
+  - job_name: file
+    file_sd_configs:
+      - files:
+          - /targets/*.yaml
+    relabel_configs:
+      - target_label: job
+        replacement: __meta_filepath

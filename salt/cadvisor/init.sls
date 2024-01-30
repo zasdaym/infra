@@ -10,3 +10,9 @@ cadvisor_container:
         - /dev/disk:/dev/disk:ro
     - network_mode: host
     - privileged: true
+
+cadvisor_monitoring:
+  file.managed:
+    - name: /opt/stacks/victoriametrics/targets/cadvisor.yaml
+    - contents: |
+        - targets: [localhost:8080]
