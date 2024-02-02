@@ -11,7 +11,7 @@ snapd_purge:
   pkg.purged:
     - name: snapd
 
-basic_install:
+tools_install:
   pkg.installed:
     - pkgs:
         - aria2
