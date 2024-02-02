@@ -21,3 +21,9 @@ basic_install:
         - mtr
         - tcptraceroute
         - vim
+
+state_cron:
+  cron.present:
+    - identifier: state_cron
+    - name: cd /tmp/infra && git pull && rsync --delete --recursive salt/ /srv/salt/ && salt-call --local state.apply
+    - minute: "*/3"
