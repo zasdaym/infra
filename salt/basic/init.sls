@@ -23,7 +23,12 @@ tools_install:
         - vim
 
 state_cron:
-  cron.present:
+  cron.absent:
     - identifier: state_cron
     - name: cd /tmp/infra && git pull && rsync --delete --recursive salt/ /srv/salt/ && salt-call --local state.apply
     - minute: "*/3"
+
+state_apply:
+  schedule.present:
+    - function: state.apply
+    - cron: '*/5 * * * *'
