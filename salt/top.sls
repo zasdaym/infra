@@ -4,11 +4,12 @@ base:
     - docker
     - cadvisor
     - grafana
-    - ladder
+    - haproxy
+    - ladder.absent
     - node_exporter
-    - pomerium
+    - pomerium.absent
     - pph21
-    - privoxy
+    - privoxy.absent
     - vector
     - victorialogs
     - victoriametrics
