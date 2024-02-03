@@ -10,4 +10,3 @@ haproxy_container:
         - CERTBOT_LOG_LEVEL=ERROR
         - HAPROXY_LOG_LEVEL=ERROR
     - network_mode: host
-    - user: root
