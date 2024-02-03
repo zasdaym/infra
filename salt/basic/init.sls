@@ -22,11 +22,9 @@ tools_install:
         - tcptraceroute
         - vim
 
-state_cron:
-  cron.absent:
-    - identifier: state_cron
-    - name: cd /tmp/infra && git pull && rsync --delete --recursive salt/ /srv/salt/ && salt-call --local state.apply
-    - minute: "*/3"
+croniter_install:
+  pip.installed:
+    - name: croniter
 
 state_apply:
   schedule.present:
