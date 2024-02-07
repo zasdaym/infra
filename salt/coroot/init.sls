@@ -6,6 +6,10 @@ coroot_container:
         - /opt/stacks/coroot/data:/data
     - command:
         - --listen=127.0.0.1:9090
+        - --disable-usage-statistics
+        - --do-not-check-slo
+        - --do-not-check-for-deployments
+        - --do-not-check-for-updates
     - environment:
         - VIRTUAL_HOST=coroot.zasdaym.my.id
         - VIRTUAL_PORT=9090
