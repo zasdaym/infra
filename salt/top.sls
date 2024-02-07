@@ -5,6 +5,7 @@ base:
     - cadvisor
     - grafana
     - haproxy
+    - hashicorp
     - ladder.absent
     - node_exporter
     - pomerium.absent
