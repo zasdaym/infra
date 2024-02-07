@@ -5,9 +5,10 @@ base:
     - coroot
     - cadvisor
     - grafana
-    - haproxy
+    - haproxy.absent
     - hashicorp
     - ladder.absent
+    - nginx
     - node_exporter
     - pomerium.absent
     - pph21
