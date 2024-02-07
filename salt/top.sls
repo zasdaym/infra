@@ -2,6 +2,7 @@ base:
   '*':
     - basic
     - docker
+    - coroot
     - cadvisor
     - grafana
     - haproxy
