@@ -3,7 +3,7 @@ coroot_container:
     - name: coroot
     - image: ghcr.io/coroot/coroot:0.28.2
     - binds:
-        - /opt/stacks/coroot/data:/data
+        - /opt/stacks/coroot/data:/opt/coroot/data
     - command:
         - --listen=127.0.0.1:9090
         - --disable-usage-statistics
