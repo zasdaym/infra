@@ -25,3 +25,9 @@ coroot_node_agent_container:
     - network_mode: host
     - pid_mode: host
     - privileged: true
+
+coroot_node_agent_monitoring:
+  file.managed:
+    - name: /opt/stacks/victoriametrics/targets/coroot-node-agent.yaml
+    - contents: |
+        - targets: [localhost:9000]
