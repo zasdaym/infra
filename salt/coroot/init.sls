@@ -1,3 +1,16 @@
+coroot_container:
+  docker_container.running:
+    - name: coroot
+    - image: ghcr.io/coroot/coroot:0.28.2
+    - binds:
+        - /opt/stacks/coroot/data:/data
+    - command:
+        - --listen=127.0.0.1:9090
+    - environment:
+        - VIRTUAL_HOST=coroot.zasdaym.my.id
+        - VIRTUAL_PORT=9090
+    - network_mode: host
+
 coroot_node_agent_container:
   docker_container.running:
     - name: coroot-node-agent
@@ -8,7 +21,7 @@ coroot_node_agent_container:
     - command:
         - --cgroupfs-root=/host/sys/fs/cgroup
         - --disable-log-parsing
-        - --listen=0.0.0.0:9000
+        - --listen=127.0.0.1:9000
     - network_mode: host
     - pid_mode: host
     - privileged: true
