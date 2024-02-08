@@ -1,7 +1,7 @@
 cadvisor_container:
   docker_container.running:
     - name: cadvisor
-    - image: zcube/cadvisor:v0.45.0
+    - image: gcr.io/cadvisor/cadvisor:v0.47.2
     - binds:
         - /:/rootfs:ro
         - /var/run:/var/run:ro
