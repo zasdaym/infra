@@ -14,5 +14,7 @@ cadvisor_container:
 cadvisor_monitoring:
   file.managed:
     - name: /opt/stacks/victoriametrics/targets/cadvisor.yaml
+    - command:
+        - --docker-only
     - contents: |
         - targets: [localhost:8080]
