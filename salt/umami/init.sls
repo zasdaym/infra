@@ -1,6 +1,6 @@
 umami:
   docker_container.running:
-    - image: ghcr.io/umami-software/umami:postgresql-latest
+    - image: ghcr.io/umami-software/umami:postgresql-v2.9.0
     - environment:
         - APP_SECRET: "{{ pillar['umami']['secret'] }}"
         - DATABASE_URL: "host=localhost port=5432 database=umami user=postgres password={{ pillar['postgresql']['password'] }}"
