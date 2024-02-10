@@ -4,7 +4,7 @@ umami:
     - environment:
         - APP_SECRET: "{{ pillar['umami']['secret'] }}"
         - DATABASE_URL: "postgresql://postgres@localhost:5432/umami"
-        - PGPASSWORD: "{{ pillar['postgres']['password'] }}"
+        - PGPASSWORD: "{{ pillar['postgresql']['password'] }}"
         - PORT: "3003"
         - VIRTUAL_HOST: analytics.zasdaym.my.id
         - VIRTUAL_PORT: "3003"
