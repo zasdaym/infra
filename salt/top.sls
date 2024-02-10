@@ -14,6 +14,7 @@ base:
     - postgresql
     - pph21
     - privoxy.absent
+    - umami
     - vector
     - victorialogs
     - victoriametrics
