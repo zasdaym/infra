@@ -5,6 +5,8 @@ beyla:
         - BEYLA_OPEN_PORT=80
         - BEYLA_PROMETHEUS_PORT=9091
     - network_mode: host
+    - privileged: true
+    - pid_mode: host
 
 /opt/stacks/victoriametrics/targets/beyla.yaml:
   file.managed:
