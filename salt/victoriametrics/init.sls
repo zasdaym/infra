@@ -13,6 +13,9 @@ victoriametrics_container:
         - /opt/stacks/victoriametrics/prometheus.yml:/prometheus.yml:ro
         - /opt/stacks/victoriametrics/targets:/targets
         - /opt/stacks/victoriametrics/data:/victoria-metrics-data
+    - environment:
+        - VIRTUAL_HOST=metrics.zasdaym.my.id
+        - VIRTUAL_PORT=8428
     - network_mode: host
     - watch:
         - victoriametrics_config
