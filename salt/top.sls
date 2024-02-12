@@ -2,6 +2,7 @@ base:
   '*':
     - basic
     - docker
+    - beyla
     - coroot
     - cadvisor
     - grafana
