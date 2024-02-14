@@ -3,7 +3,7 @@ base:
     - basic
     - docker
     - beyla
-    - coroot
+    - coroot.absent
     - cadvisor
     - grafana
     - haproxy.absent
