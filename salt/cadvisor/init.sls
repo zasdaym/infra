@@ -9,7 +9,6 @@ cadvisor:
         - /dev/disk:/dev/disk:ro
     - command:
         - --docker_only
-        - --housekeeping_interval 55s
     - network_mode: host
     - privileged: true
 
