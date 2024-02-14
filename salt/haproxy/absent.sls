@@ -1,4 +1,3 @@
-haproxy_disabled:
+haproxy:
   docker_container.absent:
-    - name: haproxy
     - force: true

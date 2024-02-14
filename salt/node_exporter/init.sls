@@ -1,6 +1,5 @@
-node_exporter_container:
+node_exporter:
   docker_container.running:
-    - name: node_exporter
     - image: quay.io/prometheus/node-exporter
     - binds:
         - /:/host:ro,rslave
@@ -10,8 +9,7 @@ node_exporter_container:
     - network_mode: host
     - pid_mode: host
 
-node_exporter_monitoring:
+/opt/stacks/victoriametrics/targets/node_exporter.yaml:
   file.managed:
-    - name: /opt/stacks/victoriametrics/targets/node_exporter.yaml
     - contents: |
         - targets: [localhost:9100]

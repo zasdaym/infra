@@ -1,12 +1,10 @@
-vector_config:
+/opt/stacks/vector/vector.toml:
   file.managed:
-    - name: /opt/stacks/vector/vector.toml
-    - source: salt://vector/files/vector.toml
     - makedirs: true
+    - source: salt://vector/files/vector.toml
 
-vector_container:
+vector:
   docker_container.running:
-    - name: vector
     - image: timberio/vector:0.35.0-debian
     - binds:
         - /var/run/docker.sock:/var/run/docker.sock:ro
@@ -16,4 +14,4 @@ vector_container:
         - --config=/etc/vector/vector.toml
     - network_mode: host
     - watch:
-        - vector_config
+        - /opt/stacks/vector/vector.toml

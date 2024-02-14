@@ -1,6 +1,5 @@
-postgresql_container:
+postgresql:
   docker_container.running:
-    - name: postgresql
     - image: postgres:16.1
     - binds:
         - /opt/stacks/postgresql/data:/var/lib/postgresql/data

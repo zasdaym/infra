@@ -1,21 +1,20 @@
-victoriametrics_config:
+/opt/stacks/victoriametrics/prometheus.yml:
   file.managed:
-    - name: /opt/stacks/victoriametrics/prometheus.yml
+    - makedirs: true
     - source: salt://victoriametrics/files/prometheus.yml
 
-victoriametrics_container:
+victoriametrics:
   docker_container.running:
-    - name: victoriametrics
     - image: victoriametrics/victoria-metrics:v1.93.10
-    - command:
-        - -promscrape.config=/prometheus.yml
     - binds:
         - /opt/stacks/victoriametrics/prometheus.yml:/prometheus.yml:ro
         - /opt/stacks/victoriametrics/targets:/targets
         - /opt/stacks/victoriametrics/data:/victoria-metrics-data
+    - command:
+        - -promscrape.config=/prometheus.yml
     - environment:
         - VIRTUAL_HOST=metrics.zasdaym.my.id
         - VIRTUAL_PORT=8428
     - network_mode: host
     - watch:
-        - victoriametrics_config
+        - /opt/stacks/victoriametrics/prometheus.yml

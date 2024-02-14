@@ -1,17 +1,14 @@
-timezone_config:
-  timezone.system:
-    - name: Asia/Jakarta
+Asia/Jakarta:
+  timezone.system: []
 
-sysctl_tcp_notsent_lowat:
+"net.ipv4.tcp_notsent_lowat":
   sysctl.present:
-    - name: net.ipv4.tcp_notsent_lowat
     - value: 131072
 
-snapd_purge:
-  pkg.purged:
-    - name: snapd
+snapd:
+  pkg.purged: []
 
-tools_install:
+tools:
   pkg.installed:
     - pkgs:
         - aria2
@@ -22,9 +19,8 @@ tools_install:
         - tcptraceroute
         - vim
 
-croniter_install:
-  pip.installed:
-    - name: croniter
+croniter:
+  pip.installed: []
 
 state_apply:
   schedule.present:

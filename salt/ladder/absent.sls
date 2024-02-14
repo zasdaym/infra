@@ -1,4 +1,3 @@
-ladder_container:
+ladder:
   docker_container.absent:
-    - name: ladder
-      force: true
+    - force: true

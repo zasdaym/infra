@@ -1,6 +1,5 @@
-victorialogs_container:
+victorialogs:
   docker_container.running:
-    - name: victorialogs
     - image: victoriametrics/victoria-logs:v0.4.2-victorialogs
     - binds:
         - /opt/stacks/victorialogs/data:/victoria-logs-data
