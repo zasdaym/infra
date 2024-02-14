@@ -1,6 +1,5 @@
-cadvisor_container:
+cadvisor:
   docker_container.running:
-    - name: cadvisor
     - image: gcr.io/cadvisor/cadvisor:v0.47.2
     - binds:
         - /:/rootfs:ro
@@ -8,13 +7,13 @@ cadvisor_container:
         - /sys:/sys:ro
         - /var/lib/docker:/var/lib/docker:ro
         - /dev/disk:/dev/disk:ro
+    - command:
+        - --docker_only
+        - --housekeeping_interval 55s
     - network_mode: host
     - privileged: true
 
-cadvisor_monitoring:
+/opt/stacks/victoriametrics/targets/cadvisor.yaml:
   file.managed:
-    - name: /opt/stacks/victoriametrics/targets/cadvisor.yaml
-    - command:
-        - --docker-only
     - contents: |
         - targets: [localhost:8080]
