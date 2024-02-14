@@ -8,6 +8,7 @@ cadvisor:
         - /var/lib/docker:/var/lib/docker:ro
         - /dev/disk:/dev/disk:ro
     - command:
+        - --enable_metrics cpu,memory
         - --docker_only
     - network_mode: host
     - privileged: true
