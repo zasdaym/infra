@@ -1,5 +1,6 @@
 /opt/stacks/beyla/beyla.yaml:
   file.managed:
+    - makedirs: true
     - source: beyla/files/beyla.yaml
 
 beyla:
