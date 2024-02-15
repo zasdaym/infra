@@ -1,7 +1,7 @@
 /opt/stacks/beyla/beyla.yaml:
   file.managed:
     - makedirs: true
-    - source: beyla/files/beyla.yaml
+    - source: salt://beyla/files/beyla.yaml
 
 beyla:
   docker_container.running:
