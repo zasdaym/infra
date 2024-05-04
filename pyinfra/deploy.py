@@ -31,10 +31,10 @@ server.packages(
     ],
 )
 
-# tailscale_installed = host.get_fact(File, "/usr/bin/tailscale")
-# if not tailscale_installed:
-#     server.shell(
-#         commands=[
-#             "curl -fsSL https://tailscale.com/install.sh | sh",
-#         ]
-#     )
+tailscale_installed = host.get_fact(File, "/usr/bin/tailscale")
+if not tailscale_installed:
+    server.shell(
+        commands=[
+            "curl -fsSL https://tailscale.com/install.sh | sh",
+        ]
+    )
