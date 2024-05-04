@@ -1,4 +1,6 @@
-from pyinfra.operations import server
+from pyinfra.context import host
+from pyinfra.facts.files import File
+from pyinfra.operations import files, server
 
 server.shell(
     commands=[
@@ -28,3 +30,11 @@ server.packages(
         "mtr",
     ],
 )
+
+# tailscale_installed = host.get_fact(File, "/usr/bin/tailscale")
+# if not tailscale_installed:
+#     server.shell(
+#         commands=[
+#             "curl -fsSL https://tailscale.com/install.sh | sh",
+#         ]
+#     )
