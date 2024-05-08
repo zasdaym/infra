@@ -3,6 +3,7 @@ base:
     - basic
     - docker
     - beyla
+    - caddy
     - cadvisor
     - grafana
     - hashicorp
