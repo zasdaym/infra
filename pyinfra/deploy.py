@@ -1,12 +1,12 @@
 from pyinfra.context import host
-from pyinfra.facts.files import File
+from pyinfra.facts.files import File, FindInFile
 from pyinfra.operations import files, server
 
-server.shell(
-    commands=[
-        "timedatectl set-timezone Asia/Jakarta",
-    ]
-)
+correct_timezone = host.get_fact(FindInFile, "/etc/timezone", "Asia/Jakarta")
+if not correct_timezone:
+    server.shell(
+        commands="timedatectl set-timezone Asia/Jakarta",
+    )
 
 # HTTP/2 prioritization
 sysctl_settings = [
@@ -26,9 +26,18 @@ server.packages(
         "btop",
         "curl",
         "dnsutils",
-        "tcptraceroute",
+        "gpg",
         "mtr",
+        "nftables",
+        "tcptraceroute",
+        "vim",
     ],
+)
+
+server.systemd.service(
+    service="nftables",
+    running=True,
+    enabled=True,
 )
 
 tailscale_installed = host.get_fact(File, "/usr/bin/tailscale")
