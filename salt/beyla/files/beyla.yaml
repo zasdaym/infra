@@ -1,7 +1,0 @@
-open_port: 80,443
-
-prometheus_export:
-  port: 9091
-
-routes:
-  unmatched: heuristic

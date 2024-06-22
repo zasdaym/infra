@@ -1,8 +1,2 @@
 # macOS
 .DS_Store
-
-# python
-.venv
-
-# kubernetes
-charts/
