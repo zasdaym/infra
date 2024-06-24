@@ -6,7 +6,9 @@ job "nginx" {
         image        = "nginxproxy/nginx-proxy:1.6.0"
         network_mode = "host"
         volumes = [
-          "/var/run/docker.sock:/tmp/docker.sock:ro"
+          "/var/run/docker.sock:/tmp/docker.sock:ro",
+          "local/additional.conf:/etc/nginx/conf.d/additional.conf:ro",
+          "/srv/nginx/www:/www:ro",
         ]
       }
       env {
@@ -15,6 +17,28 @@ job "nginx" {
       resources {
         cpu    = 100
         memory = 128
+      }
+      template {
+        destination = "local/additional.conf"
+        data        = <<-EOF
+          server {
+            server_name nomad.zasdaym.my.id;
+            location / {
+              proxy_set_header host $host;
+              proxy_pass http://127.0.0.1:4646;
+            }
+          }
+
+          server {
+            server_name file.zasdaym.my.id;
+            root /www/file.zasdaym.my.id;
+            location / {
+              autoindex on;
+              autoindex_exact_size off;
+              autoindex_localtime on;
+            }
+          }
+        EOF
       }
     }
   }
