@@ -17,7 +17,7 @@ job "grafana" {
       }
       resources {
         cpu    = 100
-        memory = 128
+        memory = 1024
       }
       user = "root"
       template {

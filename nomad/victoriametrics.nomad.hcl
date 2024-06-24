@@ -16,7 +16,7 @@ job "victoriametrics" {
       }
       resources {
         cpu    = 100
-        memory = 128
+        memory = 1024
       }
       template {
         destination = "/local/scrape.yaml"
