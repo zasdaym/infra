@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+#
+# Sync nomad jobs based on directory content.
 
 set -o errexit
 set -o nounset

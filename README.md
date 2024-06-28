@@ -1,3 +1,0 @@
-# infra
-
-Personal infrastructure configurations.
