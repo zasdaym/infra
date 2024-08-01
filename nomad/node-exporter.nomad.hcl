@@ -1,7 +1,10 @@
 job "node-exporter" {
+
   group "node-exporter" {
+
     task "node-exporter" {
       driver = "docker"
+
       config {
         image        = "quay.io/prometheus/node-exporter:v1.8.1"
         network_mode = "host"
@@ -14,6 +17,7 @@ job "node-exporter" {
           "--path.rootfs=/host"
         ]
       }
+
       resources {
         cpu    = 100
         memory = 512

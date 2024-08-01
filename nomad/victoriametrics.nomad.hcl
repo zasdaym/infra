@@ -1,7 +1,10 @@
 job "victoriametrics" {
+
   group "victoriametrics" {
+
     task "victoriametrics" {
       driver = "docker"
+
       config {
         image        = "victoriametrics/victoria-metrics:v1.93.15"
         network_mode = "host"
@@ -14,10 +17,12 @@ job "victoriametrics" {
           "-promscrape.config=/local/scrape.yaml"
         ]
       }
+
       resources {
         cpu    = 100
         memory = 1024
       }
+
       template {
         destination = "/local/scrape.yaml"
         data        = <<-EOF

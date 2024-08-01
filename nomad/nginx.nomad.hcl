@@ -1,7 +1,10 @@
 job "nginx" {
+
   group "nginx" {
+
     task "nginx" {
       driver = "docker"
+
       config {
         image        = "nginxproxy/nginx-proxy:1.6.0"
         network_mode = "host"
@@ -11,13 +14,16 @@ job "nginx" {
           "/srv/nginx/www:/www:ro",
         ]
       }
+
       env {
         TRUST_DOWNSTREAM_PROXY = "true"
       }
+
       resources {
         cpu    = 100
         memory = 1024
       }
+
       template {
         destination = "local/additional.conf"
         data        = <<-EOF
@@ -26,6 +32,15 @@ job "nginx" {
             location / {
               proxy_set_header host $host;
               proxy_pass http://127.0.0.1:4646;
+            }
+          }
+
+          server {
+            server_name cml.zasdaym.my.id;
+            location / {
+              proxy_set_header host $host;
+              proxy_pass https://172.22.2.18;
+              proxy_ssl_verify off;
             }
           }
 

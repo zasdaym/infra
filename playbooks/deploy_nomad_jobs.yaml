@@ -1,0 +1,15 @@
+---
+- name: Deploy nomad jobs
+  hosts: all
+  remote_user: root
+  gather_facts: false
+  tasks:
+    - name: Copy nomad job files
+      ansible.posix.synchronize:
+        src: ../nomad/
+        dest: /srv/nomad/
+        recursive: true
+
+    - name: Sync nomad jobs
+      ansible.builtin.script:
+        cmd: ../scripts/sync.sh
