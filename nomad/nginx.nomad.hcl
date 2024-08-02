@@ -39,8 +39,10 @@ job "nginx" {
             server_name cml.zasdaym.my.id;
             location / {
               proxy_set_header host $host;
-              proxy_pass https://172.22.2.18;
-              proxy_ssl_verify off;
+              proxy_http_version 1.1;
+              proxy_set_header Upgrade $http_upgrade;
+              proxy_set_header Connection "upgrade";
+              proxy_pass http://100.72.129.27;
             }
           }
 

@@ -5,10 +5,9 @@
   gather_facts: false
   tasks:
     - name: Copy nomad job files
-      ansible.posix.synchronize:
+      ansible.builtin.copy:
         src: ../nomad/
         dest: /srv/nomad/
-        recursive: true
 
     - name: Sync nomad jobs
       ansible.builtin.script:
