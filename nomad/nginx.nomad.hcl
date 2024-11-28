@@ -28,6 +28,14 @@ job "nginx" {
         destination = "local/additional.conf"
         data        = <<-EOF
           server {
+            server_name _;
+            location / {
+              proxy_set_header host $host;
+              proxy_pass http://0.0.0.0;
+            }
+          }
+
+          server {
             server_name nomad.zasdaym.my.id;
             location / {
               proxy_set_header host $host;
